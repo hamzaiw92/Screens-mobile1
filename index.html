@@ -1,84 +1,104 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
+
 <meta charset="UTF-8">
-<title>توافق الشاشات</title>
+<title>توافق شاشات الهاتف</title>
 
 <style>
+
 body{
-font-family: Arial;
-background:#0f172a;
-color:white;
+font-family:Arial;
+background:linear-gradient(135deg,#2196f3,#673ab7);
 text-align:center;
+color:white;
+margin:0;
+padding:0;
+}
+
+.container{
+margin-top:60px;
+background:white;
+color:#333;
+width:90%;
+max-width:500px;
+margin-left:auto;
+margin-right:auto;
+padding:30px;
+border-radius:15px;
+box-shadow:0 10px 25px rgba(0,0,0,0.2);
 }
 
 h1{
-margin-top:20px;
+margin-bottom:20px;
 }
 
-.box{
-background:#1e293b;
-padding:20px;
-border-radius:10px;
-width:350px;
-margin:auto;
-margin-top:40px;
-box-shadow:0 0 10px rgba(0,0,0,0.5);
-}
-
-select,button{
+select{
 width:100%;
-padding:10px;
-margin-top:10px;
-border-radius:6px;
-border:none;
+padding:12px;
+margin:10px 0;
 font-size:16px;
+border-radius:8px;
+border:1px solid #ccc;
 }
 
 button{
-background:#22c55e;
+width:100%;
+padding:12px;
+font-size:18px;
+border:none;
+border-radius:8px;
+background:#4caf50;
 color:white;
 cursor:pointer;
 }
 
-.result{
-margin-top:20px;
-background:#020617;
-padding:15px;
-border-radius:8px;
+button:hover{
+background:#43a047;
 }
+
+#result{
+margin-top:20px;
+padding:15px;
+background:#f5f5f5;
+border-radius:10px;
+font-size:17px;
+}
+
 </style>
 
 </head>
+
 <body>
 
-<h1>📱 موقع توافق الشاشات</h1>
+<div class="container">
 
-<div class="box">
+<h1>توافق شاشات الموبايل</h1>
 
-<select id="brand">
+<select id="company">
 <option value="">اختر الشركة</option>
 
-<option value="samsung">سامسونك</option>
-<option value="xiaomi">شاومي</option>
-<option value="realme">ريلمي</option>
-<option value="infinix">انفنكس</option>
-<option value="huawei">هواوي</option>
+<option value="xiaomi">Xiaomi</option>
+<option value="redmi">Redmi</option>
+<option value="realme">Realme</option>
+<option value="oppo">Oppo</option>
+<option value="vivo">Vivo</option>
+<option value="samsung">Samsung</option>
+<option value="huawei">Huawei</option>
+<option value="honor">Honor</option>
+<option value="infinix">Infinix</option>
+<option value="tecno">Tecno</option>
+<option value="itel">Itel</option>
 
-<option value="vivo">فيفو</option>
-<option value="tecno">تكنو</option>
-<option value="opop">وبو</option>
 </select>
 
 <select id="phone">
-<option value="">اختر الجهاز</option>
+<option>اختر الجهاز</option>
 </select>
 
-<button onclick="check()">عرض التوافق</button>
+<button onclick="show()">عرض التوافق</button>
 
-<div class="result" id="result">
-اختر جهاز لمعرفة توافق الشاشة
-</div>
+<div id="result"></div>
 
 </div>
 
@@ -86,47 +106,52 @@ border-radius:8px;
 
 let phones = {}
 
-const brand = document.getElementById("brand")
-const phone = document.getElementById("phone")
+let company = document.getElementById("company")
+let phone = document.getElementById("phone")
 
-brand.onchange = async function(){
+company.onchange = async function(){
 
-phone.innerHTML="<option>اختر الجهاز</option>"
+phone.innerHTML = "<option>اختر الجهاز</option>"
 
-let company = this.value
+let comp = this.value
 
-if(!company) return
+if(!comp) return
 
-let res = await fetch(company + ".json")
+try{
+
+let res = await fetch(comp + ".json")
+
 phones = await res.json()
-<option value="oppo">OPPO</option>
+
 for(let d in phones){
 
 let op = document.createElement("option")
+
 op.text = d
+
 phone.add(op)
 
 }
 
+}catch{
+
+alert("ملف الشركة غير موجود")
+
 }
 
-function check(){
+}
+
+function show(){
 
 let p = phone.value
 
-if(!phones[p]){
-
-document.getElementById("result").innerHTML="لا توجد معلومات"
-return
-
-}
-
-let list = phones[p]
+if(!phones[p]) return
 
 document.getElementById("result").innerHTML =
-"الأجهزة المتوافقة:<br><b>"+list.join(" , ")+"</b>"
+"الأجهزة المتوافقة:<br><b>" + phones[p].join(" , ") + "</b>"
 
 }
+
 </script>
 
 </body>
