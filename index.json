@@ -1,0 +1,14 @@
+[
+  {"brand": "Samsung", "phone": "A10", "replace": "A10 Screen Compatible"},
+  {"brand": "Samsung", "phone": "A20s", "replace": "A20s LCD + Touch Screen Assembly"},
+  {"brand": "Samsung", "phone": "A12", "replace": "A12 LCD + Touch Compatible"},
+  {"brand": "Samsung", "phone": "A13", "replace": "A13 LCD Screen Replacement"},
+  {"brand": "Samsung", "phone": "A21s", "replace": "A21s Screen Compatible"},
+  {"brand": "Samsung", "phone": "M10", "replace": "M10 Screen Compatible"},
+  {"brand": "Samsung", "phone": "M21", "replace": "M21 LCD + Frame Screen"},
+  {"brand": "Samsung", "phone": "M30", "replace": "M30 AMOLED Screen Assembly"},
+  {"brand": "Samsung", "phone": "S20", "replace": "S20 Original AMOLED Screen"},
+  {"brand": "Samsung", "phone": "S21", "replace": "S21 AMOLED Display Assembly"},
+  {"brand": "Samsung", "phone": "S22", "replace": "S22 AMOLED Display Panel"},
+  {"brand": "Samsung", "phone": "S23", "replace": "S23 Original Display Screen"}
+]

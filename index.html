@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>توافق الشاشات</title>
+<style>
+body {
+    font-family: Tahoma;
+    background: #0f172a;
+    color: white;
+    text-align: center;
+    padding: 15px;
+}
+
+h1 { color: #38bdf8; }
+
+input, select, button {
+    padding: 10px;
+    margin: 5px;
+    border-radius: 10px;
+    border: none;
+}
+
+input, select { width: 80%; }
+
+button {
+    background: #38bdf8;
+    color: black;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.card {
+    background: #1e293b;
+    padding: 15px;
+    margin: 10px;
+    border-radius: 15px;
+}
+</style>
+</head>
+<body>
+
+<h1>📱 توافق الشاشات</h1>
+
+<select id="brand">
+    <option value="">🏷️ اختر الشركة</option>
+    <option>Samsung</option>
+    <option>Xiaomi</option>
+    <option>Redmi</option>
+    <option>Realme</option>
+    <option>Infinix</option>
+    <option>Tecno</option>
+    <option>Vivo</option>
+    <option>Huawei</option>
+    <option>Honor</option>
+    <option>Oppo</option>
+    <option>Nokia</option>
+    <option>Itel</option>
+</select>
+
+<input type="text" id="phone" placeholder="📱 اسم الجهاز (مثلاً A20s)">
+<br>
+<button onclick="goToResult()">بحث</button>
+
+<script>
+function goToResult(){
+    let company = document.getElementById("brand").value.trim();
+    let model = document.getElementById("phone").value.trim();
+
+    if(company === "" || model === ""){
+        alert("الرجاء اختيار الشركة وكتابة اسم الجهاز");
+        return;
+    }
+
+    localStorage.setItem("company", company);
+    localStorage.setItem("model", model);
+    window.location.href = "result.html";
+}
+</script>
+
+</body>
+</html>
