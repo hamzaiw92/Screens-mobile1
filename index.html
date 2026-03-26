@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>اختيار الشركة والجهاز</title>
+
+<style>
+body {
+    font-family: Tahoma;
+    background: #0f172a;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+h1 {
+    color: #38bdf8;
+    margin-bottom: 20px;
+}
+
+input, select, button {
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 10px;
+    border: none;
+    font-size: 16px;
+}
+
+select, input {
+    width: 80%;
+    background: #1e293b;
+    color: #38bdf8;
+    text-align: center;
+}
+
+select option {
+    color: black;
+}
+
+input::placeholder {
+    color: #60a5fa;
+}
+
+button {
+    width: 80%;
+    background: #38bdf8;
+    color: black;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background: #22caff;
+}
+</style>
+</head>
+
+<body>
+
+<h1>📱 اختر الشركة ونوع الجهاز</h1>
+
+<select id="company">
+    <option value="">🏷️ اختر الشركة</option>
+    <option>Samsung</option>
+    <option>Huawei</option>
+    <option>Honor</option>
+    <option>Xiaomi</option>
+    <option>Redmi</option>
+    <option>Realme</option>
+    <option>Infinix</option>
+    <option>Tecno</option>
+    <option>Vivo</option>
+    <option>Oppo</option>
+    <option>Nokia</option>
+    <option>Itel</option>
+</select>
+
+<input type="text" id="model" placeholder="📱 اكتب نوع الجهاز (مثلاً A20s)">
+
+<button onclick="goToResult()">عرض التوافق</button>
+
+<script>
+function goToResult(){
+    let company = document.getElementById("company").value.trim();
+    let model = document.getElementById("model").value.trim();
+
+    if(company === "" || model === "") {
+        alert("الرجاء إدخال الشركة ونوع الجهاز");
+        return;
+    }
+
+    // حفظ البيانات في localStorage لتستخدمها صفحة result.html
+    localStorage.setItem("company", company);
+    localStorage.setItem("model", model);
+
+    // الانتقال لصفحة التوافقات
+    window.location.href = "result.html";
+}
+</script>
+
+</body>
+</html>
