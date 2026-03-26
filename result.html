@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>نتيجة التوافق</title>
+<style>
+body { font-family: Tahoma; background:#0f172a; color:white; text-align:center; padding:20px;}
+.card { background:#1e293b; padding:15px; margin:10px auto; border-radius:15px; width:80%; text-align:center;}
+button { padding:10px 20px; margin-top:15px; border-radius:10px; border:none; background:#38bdf8; color:black; cursor:pointer;}
+button:hover { background:#22caff;}
+</style>
+</head>
+<body>
+
+<h1>📱 نتيجة التوافق</h1>
+<div id="resultBox">جارٍ تحميل البيانات...</div>
+<button onclick="goHome()">⬅ رجوع</button>
+
+<!-- هنا تضيف كود JavaScript -->
+<script>
+function normalize(text){
+    return text ? text.toLowerCase().trim().replace(/\s+/g,"") : "";
+}
+
+let company = localStorage.getItem("company"); // اسم الشركة
+let model = localStorage.getItem("model");     // نوع الجهاز
+
+let resultBox = document.getElementById("resultBox");
+
+if(!company || !model){
+    resultBox.innerHTML = `<div class="card">❌ لم يتم تحديد الشركة أو الجهاز</div>`;
+} else {
+    // هنا تحدد مسار ملف JSON داخل مجلد الشركة
+    let fileName = "screens/" + normalize(company) + "/index.json";
+
+    fetch(fileName)
+    .then(response => {
+        if(!response.ok) throw new Error("ملف JSON غير موجود");
+        return response.json();
+    })
+    .then(data => {
+        resultBox.innerHTML = "";
+        let found = data.filter(s => normalize(s.phone) === normalize(model));
+        if(found.length > 0){
+            found.forEach(s => {
+                resultBox.innerHTML += `
+                <div class="card">
+                🏷️ ${s.brand} <br>
+                📱 ${s.phone} <br>
+                🔄 البديل: ${s.replace}
+                </div>`;
+            });
+        } else {
+            resultBox.innerHTML = `<div class="card">❌ لا يوجد توافق لهذا الجهاز</div>`;
+        }
+    })
+    .catch(err => {
+        resultBox.innerHTML = `<div class="card">❌ خطأ في تحميل بيانات الشركة</div>`;
+        console.error(err);
+    });
+}
+
+function goHome(){
+    window.location.href = "index.html";
+}
+</script>
+
+</body>
+</html>
